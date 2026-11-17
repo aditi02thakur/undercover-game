@@ -1,17 +1,8 @@
 # Undercover (pass-and-play)
 
-A local, single-device version of the party game Undercover with Civilians and Undercovers.
-The backend is plain Java 17 with no external libraries. The frontend is plain HTML/CSS/JS.
+A single-device version of the party game Undercover with Civilians and Undercovers.
 
-## Run
-
-```bash
-./run.sh          # then open http://localhost:8080
-./run.sh test     # run the game-rule tests
-PORT=9000 ./run.sh
-```
-
-The server listens on `127.0.0.1` only, so only this computer can reach it.
+**Play online:** https://aditi02thakur.github.io/undercover-game/
 
 ## How to play
 
@@ -22,29 +13,32 @@ The server listens on `127.0.0.1` only, so only this computer can reach it.
    That player's role is revealed.
 5. Civilians win when every Undercover is out. Undercovers win when only one Civilian is left.
 
-## Layout
+## Web version (`docs/`, hosted on GitHub Pages)
+
+Runs entirely in the browser, with no server. Each browser tab has its own game, saved in
+`sessionStorage` so a page refresh doesn't lose it.
 
 ```
-src/main/java/undercover/
-  Main.java        HTTP server (JDK built-in), static files + JSON API
-  Game.java        Game rules and state
-  GameJson.java    State -> JSON (hides roles and words until they should be seen)
-  WordPairs.java   Built-in word pairs
-src/main/resources/static/   index.html, app.js, style.css
-src/test/java/undercover/GameTest.java
+docs/index.html   page
+docs/game.js      game rules and word pairs
+docs/app.js       screens
+docs/style.css    styles
+test/game.test.js rule tests
 ```
 
-## API
+```bash
+node --test test/                                          # run the rule tests
+python3 -m http.server 8000 --bind 127.0.0.1 --directory docs   # try it locally at http://localhost:8000
+```
 
-| Method | Path | Body (form-encoded) | Purpose |
-|---|---|---|---|
-| GET | `/api/state` | | Current game state |
-| POST | `/api/new` | `name` (repeated), `undercovers` | Start a game |
-| GET | `/api/word` | | Word for the player currently revealing |
-| POST | `/api/reveal/done` | | Current player has seen their word |
-| POST | `/api/eliminate` | `player` (index) | Vote a player out |
+To add word pairs, edit `WORD_PAIRS` in `docs/game.js`.
 
-POST requests must send an `X-Requested-With` header, which stops other websites from
-posting to the local server.
+## Java version (`src/`, local only)
 
-To add word pairs, edit `WordPairs.java`.
+The original version, with a Java 17 backend (JDK built-in HTTP server, no libraries).
+It keeps one shared game in server memory, so it's meant for running on your own machine.
+
+```bash
+./run.sh          # then open http://localhost:8080
+./run.sh test     # run the Java rule tests
+```

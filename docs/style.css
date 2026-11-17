@@ -1,0 +1,102 @@
+:root {
+  --bg: #14161f;
+  --card: #1f2230;
+  --text: #f1f2f6;
+  --muted: #9aa0b4;
+  --accent: #4f7cff;
+  --danger: #ff5c7a;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+h1 { margin: 8px 0 0; font-size: 1.8rem; }
+h2 { margin: 12px 0 0; font-size: 1.1rem; }
+p { margin: 0; line-height: 1.4; }
+.muted { color: var(--muted); }
+.error { color: var(--danger); min-height: 1.2em; }
+
+.row { display: flex; gap: 8px; align-items: center; }
+
+input, select {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #353a4d;
+  background: var(--card);
+  color: var(--text);
+}
+
+button {
+  padding: 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text);
+  background: var(--card);
+}
+
+button.primary { background: var(--accent); font-weight: 600; }
+button.secondary { border: 1px solid #353a4d; }
+button.icon { flex: 0 0 44px; padding: 12px 0; }
+button.vote { background: #2a2f44; }
+button:hover { filter: brightness(1.15); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.word {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  padding: 40px 16px;
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.banner {
+  padding: 12px;
+  border-radius: 10px;
+  background: #24402f;
+}
+
+.banner.uc { background: #4a2330; }
+
+ol { margin: 0; padding-left: 24px; line-height: 1.8; }
+
+.words { display: flex; gap: 8px; }
+.words > div {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.words strong { color: var(--text); font-size: 1.3rem; }
+
+table { width: 100%; border-collapse: collapse; }
+td { padding: 8px; border-bottom: 1px solid #2c3042; }
+tr.uc td, .words .uc strong { color: var(--danger); }
