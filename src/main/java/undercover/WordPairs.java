@@ -5,47 +5,64 @@ import java.util.Random;
 /** Built-in pairs of related words. One word goes to Civilians, the other to Undercovers. */
 final class WordPairs {
 
+    // Keep in sync with WORD_PAIRS in docs/game.js (the hosted web version).
     private static final String[][] PAIRS = {
-            {"Coffee", "Tea"},
-            {"Cat", "Dog"},
-            {"Beach", "Swimming pool"},
-            {"Pizza", "Burger"},
-            {"Guitar", "Violin"},
-            {"Train", "Bus"},
-            {"Doctor", "Nurse"},
-            {"Sun", "Moon"},
-            {"Apple", "Pear"},
-            {"Football", "Rugby"},
-            {"Wine", "Beer"},
-            {"Lion", "Tiger"},
-            {"Instagram", "Facebook"},
-            {"Netflix", "YouTube"},
-            {"Shampoo", "Soap"},
-            {"Pen", "Pencil"},
-            {"Rain", "Snow"},
-            {"Bread", "Cake"},
-            {"Hotel", "Hostel"},
-            {"Spoon", "Fork"},
-            {"Car", "Motorcycle"},
-            {"Butter", "Cheese"},
-            {"Ocean", "Lake"},
-            {"Book", "Magazine"},
-            {"Chair", "Sofa"},
-            {"Mango", "Papaya"},
-            {"Cricket", "Baseball"},
-            {"Laptop", "Tablet"},
-            {"Wedding", "Birthday party"},
-            {"Airport", "Train station"},
-            {"Ice cream", "Yogurt"},
-            {"Shark", "Dolphin"},
-            {"Teacher", "Professor"},
-            {"Mountain", "Hill"},
-            {"Watch", "Clock"},
-            {"Honey", "Jam"},
-            {"Socks", "Gloves"},
-            {"Lemon", "Lime"},
-            {"Batman", "Superman"},
-            {"Harry Potter", "Lord of the Rings"},
+            // Food and drink
+            {"Coffee", "Tea"}, {"Pizza", "Burger"}, {"Wine", "Beer"}, {"Bread", "Cake"},
+            {"Butter", "Cheese"}, {"Mango", "Papaya"}, {"Ice cream", "Yogurt"}, {"Honey", "Jam"},
+            {"Lemon", "Lime"}, {"Apple", "Pear"}, {"Sushi", "Ramen"}, {"Pancake", "Waffle"},
+            {"Chocolate", "Candy"}, {"Rice", "Noodles"}, {"Samosa", "Spring roll"}, {"Biryani", "Pulao"},
+            {"Ketchup", "Mustard"}, {"Popcorn", "Chips"}, {"Orange", "Tangerine"},
+            {"Strawberry", "Raspberry"}, {"Watermelon", "Melon"}, {"Milk", "Juice"}, {"Salt", "Sugar"},
+            {"Donut", "Muffin"}, {"Garlic", "Onion"}, {"Cookie", "Brownie"}, {"Taco", "Burrito"},
+
+            // Animals
+            {"Cat", "Dog"}, {"Lion", "Tiger"}, {"Shark", "Dolphin"}, {"Horse", "Donkey"},
+            {"Eagle", "Owl"}, {"Frog", "Toad"}, {"Rabbit", "Hamster"}, {"Bee", "Wasp"},
+            {"Crocodile", "Alligator"}, {"Butterfly", "Moth"}, {"Wolf", "Fox"}, {"Elephant", "Hippo"},
+            {"Penguin", "Polar bear"},
+
+            // Places
+            {"Beach", "Swimming pool"}, {"Hotel", "Hostel"}, {"Airport", "Train station"},
+            {"Ocean", "Lake"}, {"Mountain", "Hill"}, {"Hospital", "Clinic"}, {"Library", "Bookstore"},
+            {"Cinema", "Theatre"}, {"Zoo", "Farm"}, {"Restaurant", "Cafe"}, {"Museum", "Art gallery"},
+            {"School", "College"}, {"River", "Waterfall"}, {"Desert", "Jungle"},
+
+            // Everyday objects
+            {"Pen", "Pencil"}, {"Spoon", "Fork"}, {"Book", "Magazine"}, {"Chair", "Sofa"},
+            {"Laptop", "Tablet"}, {"Watch", "Clock"}, {"Socks", "Gloves"}, {"Shampoo", "Soap"},
+            {"Umbrella", "Raincoat"}, {"Mirror", "Window"}, {"Bed", "Hammock"}, {"Toothbrush", "Comb"},
+            {"Candle", "Lamp"}, {"Wallet", "Purse"}, {"Key", "Lock"}, {"Backpack", "Suitcase"},
+            {"Helmet", "Cap"}, {"Phone", "Radio"}, {"Scissors", "Knife"}, {"Sunglasses", "Glasses"},
+            {"Necklace", "Bracelet"}, {"Fridge", "Freezer"}, {"Camera", "Binoculars"},
+
+            // Transport
+            {"Train", "Bus"}, {"Car", "Motorcycle"}, {"Rocket", "Airplane"}, {"Ship", "Submarine"},
+            {"Bicycle", "Scooter"}, {"Helicopter", "Drone"},
+
+            // Jobs and people
+            {"Doctor", "Nurse"}, {"Teacher", "Professor"}, {"Police officer", "Firefighter"},
+            {"Pilot", "Astronaut"}, {"Chef", "Waiter"}, {"Dentist", "Pharmacist"}, {"King", "President"},
+
+            // Sports, music and hobbies
+            {"Football", "Rugby"}, {"Cricket", "Baseball"}, {"Tennis", "Badminton"},
+            {"Basketball", "Volleyball"}, {"Skiing", "Snowboarding"}, {"Chess", "Checkers"},
+            {"Yoga", "Meditation"}, {"Running", "Hiking"}, {"Dancing", "Singing"}, {"Boxing", "Wrestling"},
+            {"Guitar", "Violin"}, {"Flute", "Trumpet"},
+
+            // Nature and weather
+            {"Sun", "Moon"}, {"Rain", "Snow"}, {"Volcano", "Earthquake"}, {"Star", "Planet"},
+            {"Rose", "Tulip"}, {"Cactus", "Palm tree"}, {"Fog", "Cloud"}, {"Thunder", "Lightning"},
+
+            // Celebrations
+            {"Wedding", "Birthday party"}, {"Christmas", "New Year"}, {"Diwali", "Holi"},
+            {"Santa Claus", "Easter Bunny"},
+
+            // Pop culture, tech and fantasy
+            {"Batman", "Superman"}, {"Harry Potter", "Lord of the Rings"}, {"Instagram", "Facebook"},
+            {"Netflix", "YouTube"}, {"Spider-Man", "Iron Man"}, {"Mickey Mouse", "Donald Duck"},
+            {"WhatsApp", "Telegram"}, {"Google", "Wikipedia"}, {"iPhone", "Android"},
+            {"Ghost", "Zombie"}, {"Vampire", "Werewolf"}, {"Pirate", "Ninja"}, {"Dragon", "Dinosaur"},
     };
 
     private WordPairs() {

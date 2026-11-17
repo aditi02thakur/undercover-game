@@ -111,3 +111,24 @@ test('rejects invalid eliminations', () => {
   assert.throws(() => G.eliminate(game, civilian), /already out/);
   assert.throws(() => G.eliminate(game, 99), /No such player/);
 });
+
+test('word pairs: every word is used once and the two words in a pair differ', () => {
+  const seen = new Map();
+  for (const [a, b] of G.WORD_PAIRS) {
+    assert.notEqual(a.toLowerCase(), b.toLowerCase(), `pair ${a}/${b}`);
+    for (const word of [a, b]) {
+      const key = word.toLowerCase();
+      assert.ok(!seen.has(key), `"${word}" appears in both ${seen.get(key)} and ${a}/${b}`);
+      seen.set(key, `${a}/${b}`);
+    }
+  }
+});
+
+test('word pairs match the Java version', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const javaSource = fs.readFileSync(
+    path.join(__dirname, '../src/main/java/undercover/WordPairs.java'), 'utf8');
+  const javaPairs = [...javaSource.matchAll(/\{"([^"]+)", "([^"]+)"\}/g)].map((m) => [m[1], m[2]]);
+  assert.deepEqual(javaPairs, G.WORD_PAIRS);
+});
