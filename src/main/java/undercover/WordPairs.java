@@ -63,6 +63,22 @@ final class WordPairs {
             {"Netflix", "YouTube"}, {"Spider-Man", "Iron Man"}, {"Mickey Mouse", "Donald Duck"},
             {"WhatsApp", "Telegram"}, {"Google", "Wikipedia"}, {"iPhone", "Android"},
             {"Ghost", "Zombie"}, {"Vampire", "Werewolf"}, {"Pirate", "Ninja"}, {"Dragon", "Dinosaur"},
+
+            // Hindi and Indian
+            {"Chai", "Lassi"}, {"Roti", "Paratha"}, {"Dosa", "Idli"}, {"Jalebi", "Gulab jamun"},
+            {"Pani puri", "Bhel puri"}, {"Pakora", "Kachori"}, {"Dal", "Kadhi"}, {"Paneer", "Tofu"},
+            {"Rasgulla", "Rasmalai"}, {"Ladoo", "Barfi"}, {"Chole", "Rajma"}, {"Poha", "Upma"},
+            {"Halwa", "Kheer"}, {"Pav bhaji", "Vada pav"}, {"Achaar", "Chutney"}, {"Ghee", "Malai"},
+            {"Paan", "Supari"}, {"Saree", "Lehenga"}, {"Kurta", "Sherwani"}, {"Dupatta", "Shawl"},
+            {"Chappal", "Jutti"}, {"Bindi", "Sindoor"}, {"Choodi", "Payal"}, {"Mehndi", "Haldi"},
+            {"Baraat", "Sangeet"}, {"Raksha Bandhan", "Bhai Dooj"}, {"Navratri", "Durga Puja"},
+            {"Ganesh Chaturthi", "Janmashtami"}, {"Karva Chauth", "Teej"}, {"Dhol", "Tabla"},
+            {"Sitar", "Veena"}, {"Bhangra", "Garba"}, {"Kabaddi", "Kho kho"}, {"Ludo", "Carrom"},
+            {"Antakshari", "Dumb charades"}, {"Rickshaw", "Tanga"}, {"Mela", "Bazaar"},
+            {"Dhaba", "Canteen"}, {"Matka", "Surahi"}, {"Tawa", "Kadhai"}, {"Jhadu", "Pocha"},
+            {"Nani", "Dadi"}, {"Mama", "Chacha"}, {"Bhaiya", "Didi"}, {"Ramayan", "Mahabharat"},
+            {"Shah Rukh Khan", "Salman Khan"}, {"Amitabh Bachchan", "Rajinikanth"},
+            {"Chhota Bheem", "Motu Patlu"}, {"Sholay", "DDLJ"},
     };
 
     private WordPairs() {
