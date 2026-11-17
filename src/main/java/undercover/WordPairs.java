@@ -79,6 +79,20 @@ final class WordPairs {
             {"Nani", "Dadi"}, {"Mama", "Chacha"}, {"Bhaiya", "Didi"}, {"Ramayan", "Mahabharat"},
             {"Shah Rukh Khan", "Salman Khan"}, {"Amitabh Bachchan", "Rajinikanth"},
             {"Chhota Bheem", "Motu Patlu"}, {"Sholay", "DDLJ"},
+
+            // Tricky and fun: clues for both words overlap a lot
+            {"First date", "Job interview"}, {"Alarm clock", "Mom"}, {"Ex", "Crush"},
+            {"Breakup", "Divorce"}, {"Ghosting", "Blocking"}, {"Dating app", "Arranged marriage"},
+            {"Kiss", "Hug"}, {"Dream", "Nightmare"}, {"Lie", "Excuse"}, {"Gossip", "News"},
+            {"Monday", "Friday"}, {"Hangover", "Jet lag"}, {"Homework", "Deadline"},
+            {"Selfie", "Passport photo"}, {"Wi-Fi", "Bluetooth"}, {"Password", "OTP"},
+            {"Traffic jam", "Queue"}, {"Elevator", "Escalator"}, {"Mosquito", "Housefly"},
+            {"Hiccups", "Sneezing"}, {"Tattoo", "Piercing"}, {"Beard", "Moustache"},
+            {"Pillow", "Teddy bear"}, {"Shadow", "Reflection"}, {"Ice", "Glass"},
+            {"Spy", "Detective"}, {"Twins", "Clone"}, {"Robot", "Alien"},
+            {"Time machine", "Teleporter"}, {"Magician", "Comedian"}, {"Lottery", "Casino"},
+            {"Horoscope", "Fortune teller"}, {"Gym", "Diet"}, {"Jugaad", "Shortcut"},
+            {"Sharma ji ka beta", "Topper"}, {"Saas", "Bahu"},
     };
 
     private WordPairs() {
