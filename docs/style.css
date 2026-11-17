@@ -100,3 +100,25 @@ ol { margin: 0; padding-left: 24px; line-height: 1.8; }
 table { width: 100%; border-collapse: collapse; }
 td { padding: 8px; border-bottom: 1px solid #2c3042; }
 tr.uc td, .words .uc strong { color: var(--danger); }
+
+.toggle {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--card);
+  cursor: pointer;
+  line-height: 1.4;
+}
+.toggle input { width: 20px; height: 20px; margin: 2px 0 0; padding: 0; flex: 0 0 auto; }
+
+.badge {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #4a2330;
+  color: var(--danger);
+}

@@ -7,6 +7,7 @@ const STORAGE_KEY = 'undercover-game';
 // Setup choices are remembered so "Play again" can reuse them.
 let setupNames = ['', '', '', ''];
 let setupUndercovers = 1;
+let setupHardMode = false;
 let game = loadGame();
 
 const roleLabel = (role) => (role === 'UNDERCOVER' ? 'Undercover' : 'Civilian');
@@ -100,6 +101,12 @@ function renderSetup() {
     select.append(option);
   }
 
+  const hardModeCheckbox = el('input', {
+    type: 'checkbox',
+    onchange: (e) => { setupHardMode = e.target.checked; },
+  });
+  hardModeCheckbox.checked = setupHardMode;
+
   show(
     el('h1', {}, 'Undercover'),
     el('p', { class: 'muted' },
@@ -111,13 +118,19 @@ function renderSetup() {
       ? el('button', { class: 'secondary', onclick: () => { setupNames.push(''); renderSetup(); } }, '+ Add player')
       : null,
     el('label', { class: 'row' }, 'Undercovers:', select),
+    el('label', { class: 'toggle' },
+      hardModeCheckbox,
+      el('span', {},
+        el('strong', {}, 'Hard mode'),
+        el('span', { class: 'muted' },
+          ` Only tricky pairs (${G.HARD_WORD_PAIRS.length}) where clues overlap, like First date / Job interview.`))),
     el('button', { class: 'primary', onclick: startGame }, 'Start game'),
     errorBox(),
   );
 }
 
 function startGame() {
-  act(() => { game = G.newGame(setupNames, setupUndercovers); });
+  act(() => { game = G.newGame(setupNames, setupUndercovers, { hardMode: setupHardMode }); });
 }
 
 function renderReveal() {
@@ -155,6 +168,7 @@ function renderClues() {
 
   show(
     el('h1', {}, `Round ${game.round}`),
+    game.hardMode ? el('span', { class: 'badge' }, 'Hard mode') : null,
     eliminatedBanner(),
     el('h2', {}, '1. Give your clues'),
     el('p', { class: 'muted' }, 'Each player says one word or short phrase about their word, in this order:'),
@@ -177,6 +191,7 @@ function renderOver() {
   const names = game.players.map((p) => p.name);
   show(
     el('h1', {}, game.winner === 'CIVILIANS' ? 'Civilians win!' : 'Undercovers win!'),
+    game.hardMode ? el('span', { class: 'badge' }, 'Hard mode') : null,
     eliminatedBanner(),
     el('div', { class: 'words' },
       el('div', {}, 'Civilian word', el('strong', {}, game.civilianWord)),

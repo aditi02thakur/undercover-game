@@ -19,14 +19,14 @@ const indexesOf = (game, role) =>
   game.players.map((p, i) => (p.role === role ? i : -1)).filter((i) => i >= 0);
 
 function startedGame(players, undercovers, seed) {
-  const game = G.newGame(names(players), undercovers, seeded(seed));
+  const game = G.newGame(names(players), undercovers, { rng: seeded(seed) });
   for (let i = 0; i < players; i++) G.finishReveal(game);
   return game;
 }
 
 test('assigns the requested number of undercovers', () => {
   for (let seed = 0; seed < 50; seed++) {
-    const game = G.newGame(names(7), 3, seeded(seed));
+    const game = G.newGame(names(7), 3, { rng: seeded(seed) });
     assert.equal(indexesOf(game, 'UNDERCOVER').length, 3);
     assert.equal(indexesOf(game, 'CIVILIAN').length, 4);
   }
@@ -38,7 +38,7 @@ test('works with the default crypto RNG', () => {
 });
 
 test('reveal shows each player once, then moves to clues', () => {
-  const game = G.newGame(names(4), 1, seeded(1));
+  const game = G.newGame(names(4), 1, { rng: seeded(1) });
   for (let i = 0; i < 4; i++) {
     assert.equal(game.phase, 'REVEAL');
     assert.equal(G.currentRevealPlayer(game), game.players[i]);
@@ -49,7 +49,7 @@ test('reveal shows each player once, then moves to clues', () => {
 });
 
 test('each player gets the word for their role, and the words differ', () => {
-  const game = G.newGame(names(5), 1, seeded(2));
+  const game = G.newGame(names(5), 1, { rng: seeded(2) });
   assert.notEqual(game.civilianWord, game.undercoverWord);
   for (const p of game.players) {
     const expected = p.role === 'UNDERCOVER' ? game.undercoverWord : game.civilianWord;
@@ -102,7 +102,7 @@ test('rejects invalid setups', () => {
 });
 
 test('rejects invalid eliminations', () => {
-  const notStarted = G.newGame(names(4), 1, seeded(6));
+  const notStarted = G.newGame(names(4), 1, { rng: seeded(6) });
   assert.throws(() => G.eliminate(notStarted, 0), /isn't allowed/);
 
   const game = startedGame(6, 1, 7);
@@ -114,7 +114,7 @@ test('rejects invalid eliminations', () => {
 
 test('word pairs: every word is used once and the two words in a pair differ', () => {
   const seen = new Map();
-  for (const [a, b] of G.WORD_PAIRS) {
+  for (const [a, b] of [...G.WORD_PAIRS, ...G.HARD_WORD_PAIRS]) {
     assert.notEqual(a.toLowerCase(), b.toLowerCase(), `pair ${a}/${b}`);
     for (const word of [a, b]) {
       const key = word.toLowerCase();
@@ -130,5 +130,25 @@ test('word pairs match the Java version', () => {
   const javaSource = fs.readFileSync(
     path.join(__dirname, '../src/main/java/undercover/WordPairs.java'), 'utf8');
   const javaPairs = [...javaSource.matchAll(/\{"([^"]+)", "([^"]+)"\}/g)].map((m) => [m[1], m[2]]);
-  assert.deepEqual(javaPairs, G.WORD_PAIRS);
+  assert.deepEqual(javaPairs, [...G.WORD_PAIRS, ...G.HARD_WORD_PAIRS]);
+});
+
+const isPairFrom = (pairs, game) => pairs.some(([a, b]) =>
+  (a === game.civilianWord && b === game.undercoverWord)
+  || (b === game.civilianWord && a === game.undercoverWord));
+
+test('normal mode uses only normal pairs', () => {
+  for (let seed = 0; seed < 200; seed++) {
+    const game = G.newGame(names(4), 1, { rng: seeded(seed) });
+    assert.equal(game.hardMode, false);
+    assert.ok(isPairFrom(G.WORD_PAIRS, game), `${game.civilianWord}/${game.undercoverWord}`);
+  }
+});
+
+test('hard mode uses only hard pairs', () => {
+  for (let seed = 0; seed < 200; seed++) {
+    const game = G.newGame(names(4), 1, { hardMode: true, rng: seeded(seed) });
+    assert.equal(game.hardMode, true);
+    assert.ok(isPairFrom(G.HARD_WORD_PAIRS, game), `${game.civilianWord}/${game.undercoverWord}`);
+  }
 });

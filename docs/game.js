@@ -82,9 +82,11 @@
     ['Nani', 'Dadi'], ['Mama', 'Chacha'], ['Bhaiya', 'Didi'], ['Ramayan', 'Mahabharat'],
     ['Shah Rukh Khan', 'Salman Khan'], ['Amitabh Bachchan', 'Rajinikanth'],
     ['Chhota Bheem', 'Motu Patlu'], ['Sholay', 'DDLJ'],
+  ];
 
-    // Tricky and fun: clues for both words overlap a lot
-    ['First date', 'Job interview'], ['Alarm clock', 'Mom'], ['Ex', 'Crush'],
+  // Hard mode only: clues for both words overlap a lot, so the Undercover blends in.
+  // Keep in sync with HARD_PAIRS in src/main/java/undercover/WordPairs.java.
+  const HARD_WORD_PAIRS = [    ['First date', 'Job interview'], ['Alarm clock', 'Mom'], ['Ex', 'Crush'],
     ['Breakup', 'Divorce'], ['Ghosting', 'Blocking'], ['Dating app', 'Arranged marriage'],
     ['Kiss', 'Hug'], ['Dream', 'Nightmare'], ['Lie', 'Excuse'], ['Gossip', 'News'],
     ['Monday', 'Friday'], ['Hangover', 'Jet lag'], ['Homework', 'Deadline'],
@@ -139,19 +141,24 @@
     return alive[randomInt(alive.length, rng)];
   }
 
-  function newGame(rawNames, undercoverCount, rng = cryptoRandom) {
+  /**
+   * Starts a game. Options: hardMode (use only HARD_WORD_PAIRS), rng (random source, for tests).
+   */
+  function newGame(rawNames, undercoverCount, { hardMode = false, rng = cryptoRandom } = {}) {
     const names = validateNames(rawNames);
     const max = maxUndercovers(names.length);
     if (!Number.isInteger(undercoverCount) || undercoverCount < 1 || undercoverCount > max) {
       throw new Error(`With ${names.length} players you can have 1 to ${max} undercovers.`);
     }
 
-    const pair = WORD_PAIRS[randomInt(WORD_PAIRS.length, rng)];
+    const pairs = hardMode ? HARD_WORD_PAIRS : WORD_PAIRS;
+    const pair = pairs[randomInt(pairs.length, rng)];
     const swap = rng() < 0.5;
     const roles = shuffle(names.map((_, i) => (i < undercoverCount ? 'UNDERCOVER' : 'CIVILIAN')), rng);
 
     const game = {
       phase: 'REVEAL', // REVEAL -> CLUES -> OVER
+      hardMode: Boolean(hardMode),
       round: 1,
       revealIndex: 0,
       players: names.map((name, i) => ({ name, role: roles[i], alive: true })),
@@ -226,6 +233,7 @@
     MAX_PLAYERS,
     MAX_NAME_LENGTH,
     WORD_PAIRS,
+    HARD_WORD_PAIRS,
     maxUndercovers,
     newGame,
     currentRevealPlayer,

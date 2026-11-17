@@ -7,6 +7,7 @@ A single-device version of the party game Undercover with Civilians and Undercov
 ## How to play
 
 1. Enter 3 to 20 player names and choose how many Undercovers (always fewer than Civilians).
+   Tick **Hard mode** to play only with tricky pairs where clues overlap a lot.
 2. Pass the device around. Each player taps to see their secret word, then hides it.
 3. Each round, players say one clue about their word in the order shown.
 4. Everyone discusses and votes out loud, then taps the player who got the most votes.
@@ -31,7 +32,9 @@ node --test test/                                          # run the rule tests
 python3 -m http.server 8000 --bind 127.0.0.1 --directory docs   # try it locally at http://localhost:8000
 ```
 
-To add word pairs, edit `WORD_PAIRS` in `docs/game.js`.
+To add word pairs, edit `WORD_PAIRS` (normal) or `HARD_WORD_PAIRS` (hard mode) in
+`docs/game.js`, and the matching list in `src/main/java/undercover/WordPairs.java`.
+A test fails if the two files drift apart or a word is used twice.
 
 ## Java version (`src/`, local only)
 
